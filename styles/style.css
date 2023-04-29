@@ -1,0 +1,19 @@
+:root {
+    --color-beige-50: #F2E5D9;
+    --color-beige-100: #EFDCCC;
+    --color-beige-200: #E9D3C0;
+    --color-beige-300: #DBC2AD;
+    --color-beige-400: #D1B7A1;
+    --color-beige-500: #A18167;
+
+    --color-beige-1111: #e2d3cd;
+    --color-beige-2222: #e3dad5;
+    --color-beige-3333: #e6cdb5;
+    --color-beige-4444: #f7d885;
+    --color-beige-5555: #d0c886;
+
+}
+
+body {
+    background-color: var(--color-beige-50);
+}
