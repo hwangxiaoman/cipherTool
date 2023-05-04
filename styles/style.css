@@ -12,8 +12,100 @@
     --color-beige-4444: #f7d885;
     --color-beige-5555: #d0c886;
 
+    --font-arial-100: 2.6rem arial;
+    --font-arial-101: 5rem arial;
+    --font-arial-102: 7rem arial;
+    --font-arial-103: 10rem arial;
+    --font-arial-104: 14rem arial;
+    --font-arial-105: 15rem arial;
+    --font-arial-106: 21rem arial;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62.5%;
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
     background-color: var(--color-beige-50);
+}
+
+.container {
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container>h1 {
+    font: var(--font-arial-102);
+    font-weight: 700;
+    color: var(--color-beige-500);
+}
+
+.container>span {
+    font: var(--font-arial-100);
+    color: var(--color-beige-300);
+}
+
+.container>.tool-bar {
+    margin: 5rem;
+    border: 0.2rem solid var(--color-beige-500);
+    padding: 1rem;
+}
+
+.container>.tool-bar>form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    font: var(--font-arial-100);
+    padding: 5rem;
+    width: 70rem;
+}
+
+.container>.tool-bar>form>input {
+    font-size: 2rem;
+    margin: 1rem;
+    height: 5rem;
+    text-indent: 1rem;
+    width: 25rem;
+    border-radius: 1rem;
+    border: 0.1rem solid var(--color-beige-500);
+}
+
+#Start {
+    cursor: pointer;
+    border: none;
+    background-color: var(--color-beige-500);
+    color: #ffffff;
+    font-size: 2.5rem;
+    border-radius: 1rem;
+}
+
+.container>.tool-bar>form>input:focus {
+    border: none;
+    outline: var(--color-beige-500) 2px solid;
+}
+
+.container>.tool-bar>form>label {
+    font: var(--font-arial-100);
+    color: var(--color-beige-500);
+}
+
+#key {
+    width: 5rem;
+}
+
+.entry {
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
 }

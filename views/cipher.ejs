@@ -5,13 +5,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skye | Cipher Tool</title>
+  <title>Sky | Cipher Tool</title>
   <link rel="stylesheet" type="text/css" href="../styles/style.css">
 </head>
 
 <body>
-  <h1>Cipher Tool</h1>
-  <span>Sky Corporation</span>
+  <div class="container">
+    <h1>Cipher Tool</h1>
+    <span>Sky Corporation</span>
+    <nav class="tool-bar">
+      <form action="cipher" method="post">
+        <label for="encryptThis">Input Text</label>
+        <input type="text" name="encryptThis" id="encryptThis">
+        <label for="key">Key</label>
+        <input type="text" name="key" id="key">
+        <div class="entry">
+          <% if (origText) { %>
+            <br>
+            <p style="font-size: 2rem;">Original Text: &nbsp;
+              <%= origText %>
+            </p>
+            <br>
+            <% } %>
+              <% if (keyNum) { %>
+                <p style="font-size: 2rem;">Key: &nbsp;
+                  <%= keyNum %>
+                </p>
+                <br>
+                <br>
+                <% } %>
+                  <% if (textMe) { %>
+                    <p style="font-size: 2rem;">Encrypted Text: &nbsp;
+                      <%= textMe %>
+                    </p>
+                    <br>
+                    <% } %>
+                      <% if (hashedVal) { %>
+                        <p style="font-size: 2rem;">Hashed Val: &nbsp;
+                          <%= hashedVal %>
+                        </p>
+                        <br>
+                        <% } %>
+        </div>
+        <input type="submit" value="Start" id="Start">
+      </form>
+    </nav>
+  </div>
 </body>
 
 </html>
