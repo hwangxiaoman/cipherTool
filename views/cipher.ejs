@@ -15,37 +15,45 @@
     <span>Sky Corporation</span>
     <nav class="tool-bar">
       <form action="/cipher" method="post">
-        <label for="encryptThis">Input Text</label>
-        <input type="text" name="encryptThis" id="encryptThis">
-        <label for="key">Key</label>
-        <input type="text" name="key" id="key">
-        <div class="entry">
-          <% if (origText) { %>
-            <br>
-            <p style="font-size: 2rem;">Original Text: &nbsp;
-              <%= origText %>
-            </p>
-            <br>
-            <% } %>
-              <% if (keyNum) { %>
-                <p style="font-size: 2rem;">Key: &nbsp;
-                  <%= keyNum %>
-                </p>
-                <br>
-                <br>
-                <% } %>
-                  <% if (textMe) { %>
-                    <p style="font-size: 2rem;">Encrypted Text: &nbsp;
-                      <%= textMe %>
-                    </p>
-                    <br>
-                    <% } %>
-                      <% if (hashedVal) { %>
-                        <p style="font-size: 2rem;">Hashed Val: &nbsp;
-                          <%= hashedVal %>
-                        </p>
-                        <br>
-                        <% } %>
+        <div class="cipher-options">
+          <input type="radio" name="cipherOption" id="encryptMe" value="Encrypt" required>
+          <label for="encryptMe">Encrypt</label>
+          <input type="radio" name="cipherOption" id="decryptMe" value="Decrypt" required>
+          <label for="decryptMe">Decrypt</label>
+        </div>
+        <div class="cipher-field">
+          <label for="encryptThis">Input Text</label>
+          <input type="text" name="encryptThis" id="encryptThis" required>
+          <label for="key">Key</label>
+          <input type="text" name="key" id="key" required>
+          <div class="entry">
+            <% if (origText) { %>
+              <br>
+              <p style="font-size: 2rem;">Original Text: &nbsp;
+                <%= origText %>
+              </p>
+              <br>
+              <% } %>
+                <% if (keyNum) { %>
+                  <p style="font-size: 2rem;">Key: &nbsp;
+                    <%= keyNum %>
+                  </p>
+                  <br>
+                  <br>
+                  <% } %>
+                    <% if (textMe) { %>
+                      <p style="font-size: 2rem;">Ciphered Text: &nbsp;
+                        <%= textMe %>
+                      </p>
+                      <br>
+                      <% } %>
+                        <% if (hashedVal) { %>
+                          <p style="font-size: 2rem;">Hashed Val: &nbsp;
+                            <%= hashedVal %>
+                          </p>
+                          <br>
+                          <% } %>
+          </div>
         </div>
         <input type="submit" value="Start" id="Start">
       </form>

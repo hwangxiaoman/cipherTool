@@ -69,9 +69,10 @@ body {
     font: var(--font-arial-100);
     padding: 5rem;
     width: 70rem;
+    flex-direction: column;
 }
 
-.container>.tool-bar>form>input {
+.container>.tool-bar>form>.cipher-field>input {
     font-size: 2rem;
     margin: 1rem;
     height: 5rem;
@@ -79,6 +80,7 @@ body {
     width: 25rem;
     border-radius: 1rem;
     border: 0.1rem solid var(--color-beige-500);
+    margin-bottom: 5rem;
 }
 
 #Start {
@@ -88,14 +90,16 @@ body {
     color: #ffffff;
     font-size: 2.5rem;
     border-radius: 1rem;
+    width: 20rem;
+    height: 5rem;
 }
 
-.container>.tool-bar>form>input:focus {
+.container>.tool-bar>form>.cipher-field>input:focus {
     border: none;
     outline: var(--color-beige-500) 2px solid;
 }
 
-.container>.tool-bar>form>label {
+.container>.tool-bar>form>.cipher-field>label {
     font: var(--font-arial-100);
     color: var(--color-beige-500);
 }
@@ -109,3 +113,14 @@ body {
     flex-direction: column;
     width: 50rem;
 }
+
+.cipher-options {
+    margin-bottom: 5rem;
+}
+
+.cipher-options>label {
+    font: var(--font-arial-100);
+    color: var(--color-beige-500);
+}
+
+.cipher-options>input {}
