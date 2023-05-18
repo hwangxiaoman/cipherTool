@@ -1,30 +1,38 @@
 const md5 = require('md5');
 
-function encrypt(text, shift) {
+function encrypt(text, key) {
     let result = '';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const alphabetLength = alphabet.length;
+
     for (let i = 0; i < text.length; i++) {
         let char = text.charAt(i);
+
         // Check if character is a letter
         if (/[a-zA-Z]/.test(char)) {
-            let code = text.charCodeAt(i);
-            // Uppercase letters
-            if (code >= 65 && code <= 90) {
-                char = String.fromCharCode(((code - 65 + shift) % 26) + 65);
-            }
-            // Lowercase letters
-            else if (code >= 97 && code <= 122) {
-                char = String.fromCharCode(((code - 97 + shift) % 26) + 97);
+            const isUppercase = char === char.toUpperCase();
+            char = char.toLowerCase();
+            const code = char.charCodeAt(0) - 97;
+            const shiftedCode = (code + parseInt(key)) % 26;
+            char = alphabet[shiftedCode];
+
+            if (isUppercase) {
+                char = char.toUpperCase();
             }
         }
-        // Check if character is a number or special character
-        else if (/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(char)) {
-            let code = text.charCodeAt(i);
-            char = String.fromCharCode((code + shift) % 128);
+        // Check if character is a number
+        else if (/[0-9]/.test(char)) {
+            const code = alphabet.indexOf(char);
+            char = alphabet[(code + parseInt(key)) % alphabetLength];
         }
+
         result += char;
     }
+
     return result;
 }
+
+
 
 exports.getCipher = (req, res) => {
     res.render('cipher', {
