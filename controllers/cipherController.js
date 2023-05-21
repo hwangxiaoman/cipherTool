@@ -66,46 +66,53 @@ function decrypt(text, key) {
 
     return result;
 }
+/* start here */
 
+function encryptDecryptFile(inputFile, key, cipherOption) {
+    const outputFile = './uploads/CaesarCipherFile.txt';
+    const chunkSize = 1024 * 1024; // Chunk size in bytes (1MB)
+    const readStream = fs.createReadStream(inputFile, { highWaterMark: chunkSize });
+    const writeStream = fs.createWriteStream(outputFile);
 
+    readStream.on('data', (chunk) => {
+        // Convert the chunk to a string
+        const text = chunk.toString();
 
-
-
-
-function fileTxtHandler(filePath, key, cipherOption) {
-    // Read the contents of the text file
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) throw err;
-
+        // Perform encryption or decryption on the chunk
         let processedText;
         if (cipherOption === 'Encrypt') {
-            processedText = encrypt(data, key);
+            processedText = encrypt(text, key);
         } else if (cipherOption === 'Decrypt') {
-            processedText = decrypt(data, key);
+            processedText = decrypt(text, key);
         } else {
-            // Handle invalid cipherOption value
             throw new Error('Invalid cipherOption value');
         }
 
-        // Create a new file with the processed contents
-        const outputFilePath = 'CaesarCipheredFile.txt';
-        fs.writeFile(outputFilePath, processedText, 'utf-8', (err) => {
-            if (err) throw err;
+        // Write the processed chunk to the output file
+        writeStream.write(processedText);
+    });
 
-            console.log('File processed and saved:', outputFilePath);
-        });
+    readStream.on('end', () => {
+        // Close the write stream once all chunks have been processed
+        writeStream.end();
+    });
 
-        const hashedText = md5(processedText);
+    writeStream.on('finish', () => {
+        console.log('File encryption/decryption completed.');
+    });
 
-        // Create a new file with the hashed contents
-        const outputHashedFilePath = 'CaesarCipherHashedFile.txt';
-        fs.writeFile(outputHashedFilePath, hashedText, 'utf-8', (err) => {
-            if (err) throw err;
-
-            console.log('File processed and saved:', outputHashedFilePath);
-        });
+    writeStream.on('error', (error) => {
+        console.error('Error writing to output file:', error);
     });
 }
+
+
+
+
+/* end here */
+
+
+
 
 
 exports.getCipher = (req, res) => {
@@ -121,13 +128,14 @@ exports.doCipher = (req, res) => {
     const { encryptThis, key, cipherOption } = req.body;
 
     if (encryptThis.endsWith('.txt')) {
-        fileTxtHandler(encryptThis, key, cipherOption);
+        //fileTxtHandler(encryptThis, key, cipherOption);
+        encryptDecryptFile(encryptThis, key, cipherOption);
 
         res.render('cipher', {
             textMe: 'CaesarCipheredFile.txt was created!',
             origText: encryptThis,
             keyNum: key,
-            hashedVal: 'CaesarCipherHashedFile.txt was created!'
+            hashedVal: 'none',
         });
     } else {
         let processedText;
